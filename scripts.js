@@ -33,19 +33,13 @@ var questionsArr = [question1, question2];
 //event listeners
 $( document ).ready(function() {
     $("#startButton").on("click", function() {
-        console.log("test");
         $("#questionBox").html(questionTemplate);
-        renderQuestion();
+        renderQuestion();    
     });
-
-    
 });
 
-
-
-
-
 //functions
+
 //Render new question
 function renderQuestion() {
     randomQuestion = questionsArr[Math.floor(Math.random()*questionsArr.length)];
@@ -55,6 +49,13 @@ function renderQuestion() {
     $("#B").html("<input type='radio' name='optradio' id='optionB'>"+randomQuestion.optionB);
     $("#C").html("<input type='radio' name='optradio' id='optionC'>"+randomQuestion.optionC);
     $("#D").html("<input type='radio' name='optradio' id='optionD'>"+randomQuestion.optionD);
+
+    //attach event listener to new radio buttons
+    $("input[name='optradio']").change(function(){
+        console.log("test");
+        checkQuestion();
+        renderQuestion();
+    });
 };
 
 //Check the question's answer
@@ -74,4 +75,8 @@ function checkQuestion() {
     if (userAnswer === correctAnswer) {
         score++
     };
-}
+
+    removeQuestion();
+};
+
+//Remove question from array of questions 

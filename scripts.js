@@ -1,6 +1,9 @@
 //variables
 var correctAnswer;
+var userAnswer;
 var randomQuestion;
+var score = 0;
+
 
 //initial render
 var questionTemplate = "<h1 id='question'>Is this a test question?</h1><p>Time left:<span id='timeLeft'>10 seconds</span></p><div class='radio'><label id='A'><input type='radio' name='optradio' id='optionA'>Option 1</label></div><div class='radio'><label id='B'><input type='radio' name='optradio' id='optionB'>Option 2</label></div><div class='radio'><label id='C'><input type='radio' name='optradio' id='optionC'>Option 3</label></div><div class='radio'><label id='D'><input type='radio' name='optradio' id='optionD'>Option 4</label></div>"
@@ -18,9 +21,9 @@ var question1 = {
 var question2 = {
     question: "Who admitted responsibility for Joffrey's death after being forced to take poison?",
     answer: "optionC",
-    optionA: "Olenna Tyrell",
+    optionA: "Arya Stark",
     optionB: "Sansa Stark",
-    optionC: "Arya Stark",
+    optionC: "Olenna Tyrell",
     optionD: "Littlefinger"
 };
 
@@ -54,8 +57,21 @@ function renderQuestion() {
     $("#D").html("<input type='radio' name='optradio' id='optionD'>"+randomQuestion.optionD);
 };
 
+//Check the question's answer
+function checkQuestion() {
+    correctAnswer = randomQuestion.answer;
 
+    if ($("#optionA").prop("checked")) {
+        userAnswer = "optionA";
+    } else if ($("#optionB").prop("checked")) {
+        userAnswer = "optionB";
+    } else if ($("#optionC").prop("checked")) {
+        userAnswer = "optionC";
+    } else if ($("#optionD").prop("checked")) {
+        userAnswer = "optionD";
+    };
 
-//check answer
-//document.getElementById("red").checked = true;
-//https://www.w3schools.com/jsref/prop_radio_checked.asp
+    if (userAnswer === correctAnswer) {
+        score++
+    };
+}

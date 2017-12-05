@@ -27,8 +27,98 @@ var question2 = {
     optionD: "Littlefinger"
 };
 
+var question3 = {
+    question: "Can you name the squire in service to Brienne of Tarth?",
+    answer: "optionB",
+    optionA: "Tyrion Lannister",
+    optionB: "Podrick Payne",
+    optionC: "Jon Snow",
+    optionD: "Grey Worm"
+};
+
+var question4 = {
+    question: "Who is the commander of the warrior-eunuchs of Astapor, known as the Unsullied?",
+    answer: "optionB",
+    optionA: "Daenerys Targaryen",
+    optionB: "Grey Worm",
+    optionC: "Daario Naharis",
+    optionD: "Jorah Mormont"
+};
+
+var question5 = {
+    question: "What is the name of the form of obsidian that is capable of killing White Walkers?",
+    answer: "optionD",
+    optionA: "Greyscale",
+    optionB: "Black Obsidian",
+    optionC: "Valyrian steel",
+    optionD: "Dragonglass"
+};
+
+var question6 = {
+    question: "By what method were Randyll and Dickon, the father and brother of Samwell Tarly, killed after their defeat in battle?",
+    answer: "optionA",
+    optionA: "Dragonfire",
+    optionB: "They were hung",
+    optionC: "They weren't killed",
+    optionD: "Exhaustion"
+};
+
+var question7 = {
+    question: "How did Euron Greyjoy kill his the brother Balon Greyjoy?",
+    answer: "optionC",
+    optionA: "One on one combat",
+    optionB: "Poison",
+    optionC: "He pushed him off a bridge",
+    optionD: "Wildfire"
+};
+
+var question8 = {
+    question: "What's the name of the small sword wielded by Arya Stark? And who gave it to her as a gift?",
+    answer: "optionB",
+    optionA: "Longclaw. Brienne of Tarth gave her it as a gift.",
+    optionB: "Needle. Jon Snow gave her it as a gift.",
+    optionC: "Valyria. Sansa Stark gave it to her as a gift",
+    optionD: "Needle. Ned Stark gave her it as a gift."
+};
+
+var question9 = {
+    question: "In which room of the castle was Tywin Lannister when he was mudered by his son Tyrion?",
+    answer: "optionA",
+    optionA: "Toilet. He was sitting on the toilet when Tyrion shot him with a crossbow arrow.",
+    optionB: "Throne room. He was giving a speech when Tyrion shot him with a crossbow.",
+    optionC: "The fight pit. He was overseeing a trial by combat when Tyrion poisoned him.",
+    optionD: "Bedroom. He was sleeping when Tyrion stabbed him with a sword."
+};
+
+var question10 = {
+    question: "Who wrote the series of epic fantasy novels which were adapted into the series Game of Thrones? And what were these epic fantasy novels called?",
+    answer: "optionD",
+    optionA: "George R. R. Martin. Game of Thrones.",
+    optionB: "George R. M. Martin. Game of Thrones.",
+    optionC: "George R. M. Martin. A Song of Ice and Fire.",
+    optionD: "George R. R. Martin. A Song of Ice and Fire."
+};
+
+var question11 = {
+    question: "Name the capital city of Westeros' Seven Kingdoms and the seat of the Iron Throne?",
+    answer: "optionC",
+    optionA: "Casterly Rock",
+    optionB: "Dragonstone",
+    optionC: "King's Landing",
+    optionD: "Storm's End"
+};
+
+var question12 = {
+    question: "Skroth is the language spoken by which race of creatures?",
+    answer: "optionD",
+    optionA: "The Dothraki",
+    optionB: "The Children of the Forest",
+    optionC: "The Wildlings",
+    optionD: "The White Walkers"
+};
+
 //questions Array
-var questionsArr = [question1, question2];
+var questionsArr = [question1, question2, question3, question4, question5, question6, question7, question8, question9, question10, question11, question12];
 
 //event listeners
 $( document ).ready(function() {
@@ -52,7 +142,6 @@ function renderQuestion() {
 
     //attach event listener to new radio buttons
     $("input[name='optradio']").change(function(){
-        console.log("test");
         checkQuestion();
         renderQuestion();
     });
@@ -76,7 +165,13 @@ function checkQuestion() {
         score++
     };
 
-    removeQuestion();
+    removeQuestion(randomQuestion);
 };
 
 //Remove question from array of questions 
+function removeQuestion(obj) {
+    var index = questionsArr.indexOf(obj);
+    if (index > -1) {
+        questionsArr.splice(index, 1);
+    }
+}

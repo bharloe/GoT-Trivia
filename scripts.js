@@ -3,7 +3,7 @@ var correctAnswer;
 var userAnswer;
 var randomQuestion;
 var score = 0;
-
+var wrong = 0;
 
 //initial render
 var questionTemplate = "<h1 id='question'>Is this a test question?</h1><p>Time left:<span id='timeLeft'>10 seconds</span></p><div class='radio'><label id='A'><input type='radio' name='optradio' id='optionA'>Option 1</label></div><div class='radio'><label id='B'><input type='radio' name='optradio' id='optionB'>Option 2</label></div><div class='radio'><label id='C'><input type='radio' name='optradio' id='optionC'>Option 3</label></div><div class='radio'><label id='D'><input type='radio' name='optradio' id='optionD'>Option 4</label></div>"
@@ -128,7 +128,7 @@ $( document ).ready(function() {
     });
 });
 
-//functions
+//Functions
 
 //Render new question
 function renderQuestion() {
@@ -163,6 +163,8 @@ function checkQuestion() {
 
     if (userAnswer === correctAnswer) {
         score++
+    } else {
+        wrong++
     };
 
     removeQuestion(randomQuestion);

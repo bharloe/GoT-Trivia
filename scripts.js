@@ -236,7 +236,7 @@ function startGameTimer() {
     $("#questionBox").html(gameOverScreen);
     $("#correctAnswers").text(score);
     $("#numberAttempts").text(attempts);
-  }, 60000);
+  }, 30000);
 }
 
 //Timer

@@ -6,9 +6,12 @@ var time = 15;
 var score = 0;
 var wrong = 0;
 
-//initial render
+//content for rendering
 var questionTemplate =
-  "<h1 id='question'>Is this a test question?</h1><p>Time left: <span id='timeLeft'>00:15</span></p><div class='radio'><label id='A'><input type='radio' name='optradio' id='optionA'>Option 1</label></div><div class='radio'><label id='B'><input type='radio' name='optradio' id='optionB'>Option 2</label></div><div class='radio'><label id='C'><input type='radio' name='optradio' id='optionC'>Option 3</label></div><div class='radio'><label id='D'><input type='radio' name='optradio' id='optionD'>Option 4</label></div>";
+  "<h1 id='question'>Is this a test question?</h1><p>Time left: <span id='timeLeft'>15 Seconds</span></p><div class='radio'><label id='A'><input type='radio' name='optradio' id='optionA'>Option 1</label></div><div class='radio'><label id='B'><input type='radio' name='optradio' id='optionB'>Option 2</label></div><div class='radio'><label id='C'><input type='radio' name='optradio' id='optionC'>Option 3</label></div><div class='radio'><label id='D'><input type='radio' name='optradio' id='optionD'>Option 4</label></div>";
+
+var gameOverScreen =
+  "<div class='col-md-2'></div><div class='col-md-8'><h1 class='centerText'>Game Over</h1><h2 class='centerText'>You got <span id='correctAnswers'></span> right out of <span id='numberAttempts'></span> questions attempted</h2></div><div class='col-md-2'></div>";
 
 //question objects
 var question1 = {
@@ -151,6 +154,7 @@ var questionsArr = [
 $(document).ready(function() {
   $("#startButton").on("click", function() {
     $("#questionBox").html(questionTemplate);
+    startGameTimer();
     renderQuestion();
   });
 });
@@ -159,7 +163,8 @@ $(document).ready(function() {
 
 //Render new question
 function renderQuestion() {
-  randomQuestion = questionsArr[Math.floor(Math.random() * questionsArr.length)];
+  randomQuestion =
+    questionsArr[Math.floor(Math.random() * questionsArr.length)];
 
   $("#question").text(randomQuestion.question);
   $("#A").html(
@@ -224,11 +229,21 @@ function timeRanOut() {
   renderQuestion();
 }
 
+function startGameTimer() {
+  gameOverAlert = setTimeout(function() {
+    stop();
+    var attempts = score + wrong;
+    $("#questionBox").html(gameOverScreen);
+    $("#correctAnswers").text(score);
+    $("#numberAttempts").text(attempts);
+  }, 60000);
+}
+
 //Timer
 
 function reset() {
   time = 15;
-  $("#timeLeft").text("00:15");
+  $("#timeLeft").text("15 Seconds");
 }
 
 function startTimer() {
@@ -236,29 +251,13 @@ function startTimer() {
 }
 
 function stop() {
-  console.log("stopping");
   clearInterval(intervalId);
 }
 
 function count() {
   time--;
-  var converted = timeConverter(time);
-  $("#timeLeft").text(converted);
+  $("#timeLeft").text(time + " Seconds");
   if (time === 0) {
     timeRanOut();
   }
-}
-
-function timeConverter(t) {
-  var minutes = Math.floor(t / 60);
-  var seconds = t - minutes * 60;
-  if (seconds < 10) {
-    seconds = "0" + seconds;
-  }
-  if (minutes === 0) {
-    minutes = "00";
-  } else if (minutes < 10) {
-    minutes = "0" + minutes;
-  }
-  return minutes + ":" + seconds;
 }

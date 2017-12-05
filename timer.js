@@ -8,7 +8,6 @@ function start() {
   intervalId = setInterval(count, 1000);
 }
 function stop() {
-  console.log("stopping");
   clearInterval(intervalId);
 }
 
